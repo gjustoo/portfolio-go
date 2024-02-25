@@ -1,0 +1,28 @@
+package layout
+
+templ Header() {
+	<div>
+		<nav style="background-color:red" class="text-white-500 hover:text-grey-800 flex justify-center space-x-4">
+			<a class="text-white-500 hover:text-grey-800 "href="/">Home</a>
+			<a class="text-white-500 hover:text-grey-800 "href="/contact">Contact</a>
+			<a class="text-white-500 hover:text-grey-800 "href="/projects">Projects</a>
+			<a class="text-white-500 hover:text-grey-800 "href="/about">About</a>
+			<a class="text-white-500 hover:text-grey-800 "href="/resume">Resume</a>
+		</nav>
+	</div>
+}
+
+templ Base() {
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Gabriel Justo</title>
+			<link href="static/styles.css" rel="stylesheet"/>
+		</head>
+		<body style="background-color: #131313">
+			@Header()
+			This is the body of the base layout
+			{ children... }
+		</body>
+	</html>
+}
