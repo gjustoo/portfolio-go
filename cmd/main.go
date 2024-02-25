@@ -8,10 +8,10 @@ import (
 func main() {
 
 	app := echo.New()
-	userHandler := handler.UserHandler{}
+	userHandler := handler.LayoutHandler{}
 
 	app.Static("/static/*,", "static")
-	app.GET("/user", userHandler.HandleUserShow)
+	app.GET("/user", userHandler.HandleLayoutShow)
 	//Move this por to a .ENV file
 	app.Start(":3000")
 

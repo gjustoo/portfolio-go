@@ -1,0 +1,40 @@
+package component
+
+
+type Component interface {
+    getBody() string
+    getTitle() string
+}
+
+
+func NewTextComponent(title string, body string) *TextComponent {
+    return &TextComponent{
+        title: title,
+        body: body,
+    }
+}
+
+type TextComponent struct {
+    body string
+    title string
+}
+
+func (t *TextComponent) getBody() string {
+    return t.body
+}
+
+func (t *TextComponent) getTitle() string {
+    return t.title
+}
+
+
+templ ShowComponent(c []Component) {
+    // Iterate over the components
+    for _, component := range c {
+        <div class="w-full h-auto p-3">
+            <h1 class="text-slate-100 py-2 font-bold">{component.getTitle()}</h1>
+            <p class="text-slate-400 mb-12 text-justify">@templ.Raw(component.getBody())</p>
+        </div>
+    }
+    
+}
