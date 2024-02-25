@@ -2,13 +2,37 @@ package layout
 
 templ Header() {
 	<div>
-		<nav style="background-color:red" class="text-white-500 hover:text-grey-800 flex justify-center space-x-4">
-			<a class="text-white-500 hover:text-grey-800 "href="/">Home</a>
-			<a class="text-white-500 hover:text-grey-800 "href="/contact">Contact</a>
-			<a class="text-white-500 hover:text-grey-800 "href="/projects">Projects</a>
-			<a class="text-white-500 hover:text-grey-800 "href="/about">About</a>
-			<a class="text-white-500 hover:text-grey-800 "href="/resume">Resume</a>
+		<nav style="background-color:red" class="flex justify-center space-x-4">
+			<a class="text-slate-200 hover:text-slate-500" href="/">Home</a>
+			<a class="text-slate-200 hover:text-slate-500" href="/contact">Contact</a>
+			<a class="text-slate-200 hover:text-slate-500" href="/projects">Projects</a>
+			<a class="text-slate-200 hover:text-slate-500" href="/about">About</a>
+			<a class="text-slate-200 hover:text-slate-500" href="/resume">Resume</a>
 		</nav>
+	</div>
+}
+
+templ MainBody() {
+	<div class="flex justify-center mt-1 space-y-12">
+		<div class="bg-slate-700 w-3/4 h-[80vh]">
+			{ children... }
+		</div>
+	</div>
+}
+
+templ IntroBody() {
+	<div class="flex justify-center mt-1 space-y-12">
+		<div class="bg-slate-700 w-3/4 h-[20vh]">
+			<p>
+				Hello My Name Is Gabriel Justo!
+			</p>
+            <br/>
+            <p>
+                I am a software engineer with a passion for creating and learning. I am currently working as a java backend developer.
+                I have the most experience in backend development but i have also developed frontend web apps, and game development.
+                 I am always looking for new opportunities to learn and grow as a developer.
+            </p>
+		</div>
 	</div>
 }
 
@@ -21,7 +45,8 @@ templ Base() {
 		</head>
 		<body style="background-color: #131313">
 			@Header()
-			This is the body of the base layout
+            @IntroBody()
+			@MainBody()
 			{ children... }
 		</body>
 	</html>
