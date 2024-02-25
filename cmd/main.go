@@ -11,7 +11,7 @@ func main() {
 	userHandler := handler.LayoutHandler{}
 
 	app.Static("/static/*,", "static")
-	app.GET("/user", userHandler.HandleLayoutShow)
+	app.GET("/", userHandler.HandleLayoutShow)
 	//Move this por to a .ENV file
 	app.Start(":3000")
 

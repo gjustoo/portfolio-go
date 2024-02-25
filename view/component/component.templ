@@ -1,40 +1,115 @@
 package component
 
+import "fmt"
+import "strconv"
 
 type Component interface {
-    getBody() string
-    getTitle() string
+	getBody() templ.Component
+	getTitle() string
 }
 
-
 func NewTextComponent(title string, body string) *TextComponent {
-    return &TextComponent{
-        title: title,
-        body: body,
-    }
+	return &TextComponent{
+		title: title,
+
+		body: body,
+	}
 }
 
 type TextComponent struct {
-    body string
-    title string
+	body  string
+	title string
 }
 
-func (t *TextComponent) getBody() string {
-    return t.body
+func (t *TextComponent) getBody() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		_, err := io.WriteString(w, "<p class=\"text-slate-400 mb-12 text-justify\">"+t.body+"</p>")
+		return err
+	})
 }
 
 func (t *TextComponent) getTitle() string {
-    return t.title
+	return t.title
 }
 
+type ProjectComponent struct {
+	body  templ.Component
+	title string
+}
+
+func NewProjectComponent(title string, body, url string) *ProjectComponent {
+
+	bodyContent := `
+<div class="max-w-sm p-6 border border-gray-500 rounded-lg shadow bg-[#242323]/80">
+    <a href="%s" target="_blank">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">%s</h5>
+    </a>
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">%s</p>
+    <a href="%s" target="_blank" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#242323]/80 hover:bg-gray-300/10 rounded-lg">
+        Read more
+        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+    </a>
+</div>
+`
+	bodyContent = fmt.Sprintf(bodyContent,url, title, body,url)
+
+	b := templ.Raw(bodyContent)
+
+	return &ProjectComponent{
+		title: title,
+
+		body: b,
+	}
+}
+
+func (c *ProjectComponent) getBody() templ.Component {
+	return c.body
+}
+
+func (c *ProjectComponent) getTitle() string {
+	return c.title
+}
+
+type ProjectLayout struct {
+    components []*ProjectComponent
+    title string
+}
+
+func NewProjectLayout(title string, components []*ProjectComponent) *ProjectLayout {
+    return &ProjectLayout{
+        title: title,
+        components: components,
+    }
+}
+
+func (p *ProjectLayout) getBody() templ.Component {
+    return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+        _, err := io.WriteString(w, "<div class=\"grid grid-cols-3 gap-4\">")
+        if err != nil {
+            return err
+        }
+        for _, component := range p.components {
+            err = component.getBody().Render(ctx, w)
+            if err != nil {
+                return err
+            }
+        }
+        _, err = io.WriteString(w, "</div>")
+        return err
+    })
+}
+func (p *ProjectLayout) getTitle() string {
+    return p.title
+}
 
 templ ShowComponent(c []Component) {
-    // Iterate over the components
-    for _, component := range c {
-        <div class="w-full h-auto p-3">
-            <h1 class="text-slate-100 py-2 font-bold">{component.getTitle()}</h1>
-            <p class="text-slate-400 mb-12 text-justify">@templ.Raw(component.getBody())</p>
-        </div>
-    }
-    
+	// Iterate over the components
+	for i, component := range c {
+		<div id={strconv.FormatInt(int64(i),10)} class="w-full h-auto p-3">
+			<h1 class="text-slate-100 py-2 font-bold">{ component.getTitle() }</h1>
+			@component.getBody()
+		</div>
+	}
 }

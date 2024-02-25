@@ -10,15 +10,19 @@ import "context"
 import "io"
 import "bytes"
 
+import "fmt"
+import "strconv"
+
 type Component interface {
-	getBody() string
+	getBody() templ.Component
 	getTitle() string
 }
 
 func NewTextComponent(title string, body string) *TextComponent {
 	return &TextComponent{
 		title: title,
-		body:  body,
+
+		body: body,
 	}
 }
 
@@ -27,12 +31,87 @@ type TextComponent struct {
 	title string
 }
 
-func (t *TextComponent) getBody() string {
-	return t.body
+func (t *TextComponent) getBody() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		_, err := io.WriteString(w, "<p class=\"text-slate-400 mb-12 text-justify\">"+t.body+"</p>")
+		return err
+	})
 }
 
 func (t *TextComponent) getTitle() string {
 	return t.title
+}
+
+type ProjectComponent struct {
+	body  templ.Component
+	title string
+}
+
+func NewProjectComponent(title string, body, url string) *ProjectComponent {
+
+	bodyContent := `
+<div class="max-w-sm p-6 border border-gray-500 rounded-lg shadow bg-[#242323]/80">
+    <a href="%s" target="_blank">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">%s</h5>
+    </a>
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">%s</p>
+    <a href="%s" target="_blank" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#242323]/80 hover:bg-gray-300/10 rounded-lg">
+        Read more
+        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+    </a>
+</div>
+`
+	bodyContent = fmt.Sprintf(bodyContent, url, title, body, url)
+
+	b := templ.Raw(bodyContent)
+
+	return &ProjectComponent{
+		title: title,
+
+		body: b,
+	}
+}
+
+func (c *ProjectComponent) getBody() templ.Component {
+	return c.body
+}
+
+func (c *ProjectComponent) getTitle() string {
+	return c.title
+}
+
+type ProjectLayout struct {
+	components []*ProjectComponent
+	title      string
+}
+
+func NewProjectLayout(title string, components []*ProjectComponent) *ProjectLayout {
+	return &ProjectLayout{
+		title:      title,
+		components: components,
+	}
+}
+
+func (p *ProjectLayout) getBody() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		_, err := io.WriteString(w, "<div class=\"grid grid-cols-3 gap-4\">")
+		if err != nil {
+			return err
+		}
+		for _, component := range p.components {
+			err = component.getBody().Render(ctx, w)
+			if err != nil {
+				return err
+			}
+		}
+		_, err = io.WriteString(w, "</div>")
+		return err
+	})
+}
+func (p *ProjectLayout) getTitle() string {
+	return p.title
 }
 
 func ShowComponent(c []Component) templ.Component {
@@ -48,29 +127,37 @@ func ShowComponent(c []Component) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		for _, component := range c {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-auto p-3\"><h1 class=\"text-slate-100 py-2 font-bold\">")
+		for i, component := range c {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(strconv.FormatInt(int64(i), 10)))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"w-full h-auto p-3\"><h1 class=\"text-slate-100 py-2 font-bold\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var2 string
 			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(component.getTitle())
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/component/component.templ`, Line: 34, Col: 75}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/component/component.templ`, Line: 110, Col: 67}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><p class=\"text-slate-400 mb-12 text-justify\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templ.Raw(component.getBody()).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = component.getBody().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

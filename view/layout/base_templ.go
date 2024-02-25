@@ -34,39 +34,48 @@ func Header() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/contact\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/#0\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var3 := `Contact`
+		templ_7745c5c3_Var3 := `About`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/projects\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/#1\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var4 := `Projects`
+		templ_7745c5c3_Var4 := `Skills`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/about\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/#2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var5 := `About`
+		templ_7745c5c3_Var5 := `Projects`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var5)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/resume\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/#3\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Var6 := `Resume`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a class=\"bg-[#242323]/80 hover:bg-gray-300/10 text-slate-200 shadow-md py-4 px-8 rounded-xl\" href=\"/#4\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var7 := `Contact`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -89,12 +98,12 @@ func MainBody(components []component.Component) templ.Component {
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var7 == nil {
-			templ_7745c5c3_Var7 = templ.NopComponent
+		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var8 == nil {
+			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-center mt-1 space-y-12\"><div class=\" w-3/5 h-[100vh]\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-center mt-1 space-y-12\"><div class=\" w-3/5 h-auto\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -121,17 +130,17 @@ func IntroBody() templ.Component {
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var8 == nil {
-			templ_7745c5c3_Var8 = templ.NopComponent
+		templ_7745c5c3_Var9 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var9 == nil {
+			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex  justify-center mt-1 space-y-12\"><div class=\"flex flex-col justify-center items-center w-auto h-[40vh]\"><h1 class=\"mb-4 text-3xl font-extrabold text-gray-900 dark:text-gray-400 md:text-5xl lg:text-6xl\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var9 := `Hi Im  `
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var9)
+		templ_7745c5c3_Var10 := `Hi Im  `
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var10)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -139,8 +148,8 @@ func IntroBody() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var10 := `Gabriel Justo`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var10)
+		templ_7745c5c3_Var11 := `Gabriel Justo`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -148,8 +157,8 @@ func IntroBody() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var11 := `, `
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
+		templ_7745c5c3_Var12 := `, `
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -157,17 +166,17 @@ func IntroBody() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var12 := `Backend Developer.`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></h1><p class=\"text-lg text-justify w-2/4 font-normal text-gray-500 lg:text-xl dark:text-gray-400\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Var13 := `Building and shipping robust and scalable backend software. Proficient in Java, Golang and Python. `
+		templ_7745c5c3_Var13 := `Backend Developer.`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></h1><p class=\"text-lg text-justify w-2/4 font-normal text-gray-500 lg:text-xl dark:text-gray-400 mt-10\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var14 := `Building and shipping robust and scalable backend software. Proficient in Java, Golang and Python. `
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -175,8 +184,8 @@ func IntroBody() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var14 := `Passion for building optimized solutions. Turning complex challenges into elegant, efficient, and secure systems.`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
+		templ_7745c5c3_Var15 := `Passion for building optimized solutions. Turning complex challenges into elegant, efficient, and secure systems.`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -199,21 +208,21 @@ func Base(components []component.Component) templ.Component {
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var15 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var15 == nil {
-			templ_7745c5c3_Var15 = templ.NopComponent
+		templ_7745c5c3_Var16 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var16 == nil {
+			templ_7745c5c3_Var16 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html><head><title>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var16 := `Gabriel Justo`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var16)
+		templ_7745c5c3_Var17 := `Gabriel Justo`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var17)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title><link href=\"static/styles.css\" rel=\"stylesheet\"></head><body class=\"bg-gradient-to-b from-black via-[#090909] to-[#131313]\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title><link href=\"static/styles.css\" rel=\"stylesheet\"></head><body class=\"bg-gradient-to-b from-black via-[#090909] to-[#131313] \">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
