@@ -12,6 +12,9 @@ RUN go mod download
 
 
 # Install and execute npm and tailwindcss
+
+RUN apt-get install -y nodejs
+
 RUN apt-get install -y npm
 
 RUN npm install tailwindcss postcss-cli autoprefixer
