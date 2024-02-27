@@ -13,7 +13,12 @@ RUN go mod download
 
 # Install and execute npm and tailwindcss
 
+# Update package lists
+RUN apt-get update
+
+# Install Node.js
 RUN apt-get install -y nodejs
+
 
 RUN apt-get install -y npm
 
