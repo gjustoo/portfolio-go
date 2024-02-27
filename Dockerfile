@@ -10,6 +10,15 @@ COPY . /app
 # Download and install any required dependencies
 RUN go mod download
 
+
+# Install and execute npm and tailwindcss
+RUN apt-get install -y npm
+
+RUN npm install tailwindcss postcss-cli autoprefixer
+
+
+RUN npx tailwindcss -i ./view/css/input.css -o ./static/styles.css --minify   
+
 # Build the Go app
 RUN go build -o . cmd/main.go
 
